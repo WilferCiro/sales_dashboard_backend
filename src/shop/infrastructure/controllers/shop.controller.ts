@@ -14,16 +14,15 @@ import {
 } from '@nestjs/common';
 
 // Application
-import { ShopMapper } from '../mapper/shop.mapper';
-import { CreateShopDto } from '../dto/shop.create.dto';
-import { UpdateShopDto } from '../dto/shop.update.dto';
-import { ShopDto } from '../dto/shop.dto';
+import { ShopMapper } from '../../application/mapper/shop.mapper';
+import { CreateShopDto } from '../../application/dto/shop.create.dto';
+import { UpdateShopDto } from '../../application/dto/shop.update.dto';
+import { ShopDto } from '../../application/dto/shop.dto';
 // Domain
 import { ShopService } from 'src/shop/domain/interfaces/shop.service.interface';
 import { Shop } from 'src/shop/domain/entities/shop.type';
 
 // Shared
-import { BaseController } from 'src/shared/application/controllers/base.controller';
 import { AuthGuard } from 'src/shared/application/middleware/auth.middleware';
 import { PaginationMapper } from 'src/shared/application/mapper/pagination.mapper';
 import { PaginatedDto } from 'src/shared/application/dto/paginated.get.dto';
@@ -31,6 +30,7 @@ import { PaginatedResultInterface } from 'src/shared/application/interfaces/pagi
 import { Response } from 'express';
 import { Roles } from 'src/shared/application/decorators/roles.decorator';
 import { SelectDto } from 'src/shared/application/dto/select.dto';
+import { BaseController } from 'src/shared/infrastructure/controllers/base.controller';
 
 @Controller('shops')
 export class ShopController extends BaseController {

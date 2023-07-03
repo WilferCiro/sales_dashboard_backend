@@ -1,6 +1,6 @@
 // Se ubica en infraestructura porque tiene intereacción con la base de datos
 import { Module, Provider } from '@nestjs/common';
-import { ShopController } from '../application/controllers/shop.controller';
+import { ShopController } from './controllers/shop.controller';
 import { ShopRepositoryImpl } from './sql/repositories/shop.repository';
 import { ShopServiceImpl } from '../application/services/shop.service';
 import { TypeOrmModule } from '@nestjs/typeorm';

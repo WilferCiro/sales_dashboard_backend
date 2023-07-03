@@ -1,6 +1,6 @@
 // Se ubica en infraestructura porque tiene intereacción con la base de datos
 import { Module, Provider } from '@nestjs/common';
-import { CityController } from '../application/controllers/city.controller';
+import { CityController } from './controllers/city.controller';
 import { CityRepositoryImpl } from './sql/repositories/city.repository';
 import { CityServiceImpl } from '../application/services/city.service';
 import { TypeOrmModule } from '@nestjs/typeorm';

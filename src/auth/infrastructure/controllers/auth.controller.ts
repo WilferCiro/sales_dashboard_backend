@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, Inject, Post } from '@nestjs/common';
-import { BaseController } from 'src/shared/application/controllers/base.controller';
+import { BaseController } from 'src/shared/infrastructure/controllers/base.controller';
 import { LoginAuthDto } from 'src/auth/application/dto/auth.login.dto';
 import { AuthService } from 'src/auth/domain/interfaces/auth.service.interface';
 

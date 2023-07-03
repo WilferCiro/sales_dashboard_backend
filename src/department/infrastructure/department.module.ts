@@ -1,6 +1,6 @@
 // Se ubica en infraestructura porque tiene intereacción con la base de datos
 import { Module, Provider } from '@nestjs/common';
-import { DepartmentController } from '../application/controllers/department.controller';
+import { DepartmentController } from './controllers/department.controller';
 import { DepartmentRepositoryImpl } from './sql/repositories/department.repository';
 import { DepartmentServiceImpl } from '../application/services/department.service';
 import { TypeOrmModule } from '@nestjs/typeorm';

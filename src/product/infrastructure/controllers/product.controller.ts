@@ -12,40 +12,49 @@ import {
 } from '@nestjs/common';
 
 // Application
-import { HeadquarterMapper } from '../mapper/headquarter.mapper';
-import { CreateHeadquarterDto } from '../dto/headquarter.create.dto';
-import { UpdateHeadquarterDto } from '../dto/headquarter.update.dto';
-import { HeadquarterDto } from '../dto/headquarter.dto';
+import { ProductMapper } from '../../application/mapper/product.mapper';
+import { CreateProductDto } from '../../application/dto/product.create.dto';
+import { UpdateProductDto } from '../../application/dto/product.update.dto';
+import { ProductDto } from '../../application/dto/product.dto';
 // Domain
-import { HeadquarterService } from 'src/headquarter/domain/interfaces/headquarter.service.interface';
-import { Headquarter } from 'src/headquarter/domain/entities/headquarter.type';
+import { ProductService } from 'src/product/domain/interfaces/product.service.interface';
+import { Product } from 'src/product/domain/entities/product.type';
 
 // Shared
-import { BaseController } from 'src/shared/application/controllers/base.controller';
+import { BaseController } from 'src/shared/infrastructure/controllers/base.controller';
 import { AuthGuard } from 'src/shared/application/middleware/auth.middleware';
 import { PaginationMapper } from 'src/shared/application/mapper/pagination.mapper';
 import { PaginatedDto } from 'src/shared/application/dto/paginated.get.dto';
 import { PaginatedResultInterface } from 'src/shared/application/interfaces/paginated.result.interface';
 import { Roles } from 'src/shared/application/decorators/roles.decorator';
 
-@Controller('headquarters')
-export class HeadquarterController extends BaseController {
-  private mapper: HeadquarterMapper;
+@Controller('products')
+export class ProductController extends BaseController {
+  private mapper: ProductMapper;
   private paginationMapper: PaginationMapper;
   constructor(
-    @Inject('HeadquarterService') private readonly service: HeadquarterService,
+    @Inject('ProductService') private readonly service: ProductService,
   ) {
     super();
-    this.mapper = new HeadquarterMapper();
+    this.mapper = new ProductMapper();
     this.paginationMapper = new PaginationMapper();
   }
 
   @Roles('admin', 'seller')
   @UseGuards(AuthGuard)
   @Get('')
-  async findAll(): Promise<HeadquarterDto[]> {
+  async findAll(): Promise<ProductDto[]> {
     const data = await this.service.findAll();
-    return data.map((d: Headquarter) => this.mapper.toDto(d));
+    return data.map((d: Product) => this.mapper.toDto(d));
+  }
+
+  @Roles('admin', 'seller')
+  @UseGuards(AuthGuard)
+  @Get('search')
+  async findSearch(@Query() query): Promise<ProductDto[]> {
+    const search = query.search || '';
+    const data = await this.service.findSearch(search);
+    return data.map((d: Product) => this.mapper.toDtoSelect(d));
   }
 
   @Roles('admin', 'seller')
@@ -53,45 +62,39 @@ export class HeadquarterController extends BaseController {
   @Get('paginated')
   async findPaginated(
     @Query() paginationDto: PaginatedDto,
-  ): Promise<PaginatedResultInterface<HeadquarterDto>> {
+  ): Promise<PaginatedResultInterface<ProductDto>> {
     const pagination = this.paginationMapper.toDomain(paginationDto);
     const data = await this.service.findPaginated(pagination);
     return {
       total: data.total,
-      data: data.data.map((d: Headquarter) => this.mapper.toDto(d)),
+      data: data.data.map((d: Product) => this.mapper.toDto(d)),
     };
   }
 
   @Roles('admin', 'seller')
   @UseGuards(AuthGuard)
   @Get(':id')
-  async findById(@Param('id') id: number): Promise<HeadquarterDto> {
+  async findById(@Param('id') id: number): Promise<ProductDto> {
     const data = await this.service.findById(id);
     return this.mapper.toDto(data);
   }
-
   @Roles('admin', 'seller')
   @UseGuards(AuthGuard)
   @Post()
-  async create(
-    @Body() headquarter: CreateHeadquarterDto,
-  ): Promise<HeadquarterDto> {
-    const data = await this.service.create(
-      this.mapper.toDomainCreate(headquarter),
-    );
+  async create(@Body() product: CreateProductDto): Promise<ProductDto> {
+    const data = await this.service.create(this.mapper.toDomainCreate(product));
     return this.mapper.toDto(data);
   }
-
   @Roles('admin', 'seller')
   @UseGuards(AuthGuard)
   @Patch(':id')
   async update(
     @Param('id') id: number,
-    @Body() headquarter: UpdateHeadquarterDto,
-  ): Promise<HeadquarterDto> {
+    @Body() product: UpdateProductDto,
+  ): Promise<ProductDto> {
     const data = await this.service.update(
       id,
-      this.mapper.toDomainUpdate(headquarter),
+      this.mapper.toDomainUpdate(product),
     );
     return this.mapper.toDto(data);
   }

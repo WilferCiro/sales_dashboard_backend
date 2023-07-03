@@ -12,16 +12,16 @@ import {
 } from '@nestjs/common';
 
 // Application
-import { ProductCategoryMapper } from '../mapper/product_category.mapper';
-import { CreateProductCategoryDto } from '../dto/product_category.create.dto';
-import { UpdateProductCategoryDto } from '../dto/product_category.update.dto';
-import { ProductCategoryDto } from '../dto/product_category.dto';
+import { ProductCategoryMapper } from '../../application/mapper/product_category.mapper';
+import { CreateProductCategoryDto } from '../../application/dto/product_category.create.dto';
+import { UpdateProductCategoryDto } from '../../application/dto/product_category.update.dto';
+import { ProductCategoryDto } from '../../application/dto/product_category.dto';
 // Domain
 import { ProductCategoryService } from 'src/product_category/domain/interfaces/product_category.service.interface';
 import { ProductCategory } from 'src/product_category/domain/entities/product_category.type';
 
 // Shared
-import { BaseController } from 'src/shared/application/controllers/base.controller';
+import { BaseController } from 'src/shared/infrastructure/controllers/base.controller';
 import { AuthGuard } from 'src/shared/application/middleware/auth.middleware';
 import { PaginationMapper } from 'src/shared/application/mapper/pagination.mapper';
 import { PaginatedDto } from 'src/shared/application/dto/paginated.get.dto';

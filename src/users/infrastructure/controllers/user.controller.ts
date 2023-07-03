@@ -13,11 +13,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from '../../domain/interfaces/user.service.interface';
-import { BaseController } from 'src/shared/application/controllers/base.controller';
-import { CreateUserDto } from '../dto/user.create.dto';
-import { UpdateUserDto } from '../dto/user.update.dto';
+import { CreateUserDto } from '../../application/dto/user.create.dto';
+import { UpdateUserDto } from '../../application/dto/user.update.dto';
 import { UserDto } from 'src/users/application/dto/user.dto';
-import { UserMapper } from '../mapper/user.mapper';
+import { UserMapper } from '../../application/mapper/user.mapper';
 import { AuthGuard } from 'src/shared/application/middleware/auth.middleware';
 import { PaginatedDto } from 'src/shared/application/dto/paginated.get.dto';
 import { PaginatedResultInterface } from 'src/shared/application/interfaces/paginated.result.interface';
@@ -26,6 +25,7 @@ import { User } from 'src/users/domain/entities/user.type';
 import { Request, Response } from 'express';
 import { Roles } from 'src/shared/application/decorators/roles.decorator';
 import { SelectDto } from 'src/shared/application/dto/select.dto';
+import { BaseController } from 'src/shared/infrastructure/controllers/base.controller';
 
 @Controller('users')
 export class UserController extends BaseController {

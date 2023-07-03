@@ -1,8 +1,8 @@
 import { UserService } from 'src/users/domain/interfaces/user.service.interface';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './user.controller';
-import { UserServiceImpl } from '../services/user.service';
-import { CreateUserDto } from '../dto/user.create.dto';
+import { UserServiceImpl } from '../../application/services/user.service';
+import { CreateUserDto } from '../../application/dto/user.create.dto';
 import {
   userCreateDataFake as registerCreateDataFake,
   userDataFake as registerDataFake,
@@ -18,7 +18,7 @@ import { UserRepositoryImpl } from 'src/users/infrastructure/sql/repositories/us
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { UserEntity } from 'src/users/infrastructure/sql/entities/user.entity';
 import { Repository } from 'typeorm';
-import { UserMapper } from '../mapper/user.mapper';
+import { UserMapper } from '../../application/mapper/user.mapper';
 
 describe('UsersController', () => {
   let usersController: UserController;

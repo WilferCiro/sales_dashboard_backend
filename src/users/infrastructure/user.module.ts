@@ -1,6 +1,6 @@
 // Se ubica en infraestructura porque tiene intereacción con la base de datos
 import { Global, Module, Provider } from '@nestjs/common';
-import { UserController } from '../application/controllers/user.controller';
+import { UserController } from './controllers/user.controller';
 import { UserServiceImpl } from '../application/services/user.service';
 import { PasswordHelper } from 'src/auth/infrastructure/helpers/PasswordHelper';
 import { UserRepositoryImpl } from './sql/repositories/user.repository';
