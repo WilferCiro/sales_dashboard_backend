@@ -5,7 +5,7 @@ export class Shop {
   id?: number;
   name: string;
   nit: string;
-  photo: string;
+  photo?: string;
   owner: User;
   headquarters?: Headquarter[];
   active: boolean;

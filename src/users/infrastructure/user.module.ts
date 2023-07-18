@@ -9,7 +9,7 @@ import { UserEntity } from './sql/entities/user.entity';
 import { MailModule } from 'src/email/infrastructure/email.module';
 import { FilesModule } from 'src/files/infrastructure/files.module';
 
-const userProviders: Provider[] = [
+export const userProviders: Provider[] = [
   {
     provide: 'UserRepository',
     useClass: UserRepositoryImpl,

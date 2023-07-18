@@ -86,6 +86,14 @@ describe('UserRepository', () => {
   });
 
   describe('getUser', () => {
+    it('should findSearch registers', async () => {
+      const registers: UserEntity[] = registerDataFake;
+      jest.spyOn(repositoryMock, 'find').mockResolvedValue(registers);
+
+      const result = await repository.findSearch('search');
+
+      expect(result).toEqual(registers);
+    });
     it('should findAll registers', async () => {
       const registers: UserEntity[] = registerDataFake;
       const findSpy = jest

@@ -90,6 +90,7 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
+    "coveragePathIgnorePatterns": ["^.*\\.(dto|type)\\.[jt]s?$"],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   }
